@@ -1,0 +1,61 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cmake build",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S", ".",         // Specify the source directory
+                "-B", "build",      // Specify the build directory
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+                "-DSOURCE_FILE=${file}" // Pass the current file as a CMake variable  
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "cmake compile",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", "build",
+                "--target", "${fileBasenameNoExtension}" // Use the current file's name without extension as the target
+            ],
+            "problemMatcher": ["$gcc"],
+            "dependsOn": "cmake build"
+        },
+        {
+            "label": "cmake build release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S", ".",         // Specify the source directory
+                "-B", "build",      // Specify the build directory
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+                "-DSOURCE_FILE=${file}" // Pass the current file as a CMake variable
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "cmake compile release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", "build",  // Build the project
+                "--target", "${fileBasenameNoExtension}" // Use the current file's name without extension as the target
+            ],
+            "problemMatcher": ["$gcc"],
+            "dependsOn": "cmake build release"
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(TreeCompression)
+project(MicroBenchmark)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -29,18 +29,23 @@ clone_if_not_exists(${GOOGLETEST_GIT_REPO} ${GOOGLETEST_DIR} ${GOOGLETEST_GIT_TA
 # Add Benchmark and GoogleTest
 add_subdirectory(benchmark)
 
-# Define source files
-#set(SOURCES
-#    tree_compression.cc
-#)
 
 set(SOURCE_FILE "tree_compression.cc" CACHE STRING "Single source file to run")
 
-# Create executable
-add_executable(${PROJECT_NAME} ${SOURCE_FILE})
+# Extract the base name without an extension to use as the target name
+get_filename_component(TARGET_NAME ${SOURCE_FILE} NAME_WE)
+
+# Check if the specified source file exists
+if(NOT EXISTS "${SOURCE_FILE}")
+    message(FATAL_ERROR "The specified source file ${SOURCE_FILE} does not exist.")
+endif()
+
+# Create an executable target based on the file's base name
+add_executable(${TARGET_NAME} ${SOURCE_FILE})
+
 
 # Link benchmark library
-target_link_libraries(${PROJECT_NAME} benchmark::benchmark)
+target_link_libraries(${TARGET_NAME} benchmark::benchmark)
 
 # Set default build type to Debug if not specified
 if(NOT CMAKE_BUILD_TYPE)
