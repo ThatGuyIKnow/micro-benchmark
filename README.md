@@ -1,7 +1,7 @@
 
-# TreeCompression Project
+# MicroBenchmark
 
-This project implements a tree compression algorithm as part of a benchmarking suite using the Google Benchmark library. The project is designed to benchmark the performance of different tree compression strategies.
+This project is a quick setup for a CPP benchmark. It's automatically sets up Google Benchmark and Google Test, along with a sample project. Included are VSCode/Codium tasks and launch files, relevant for quick debugging and testing.
 
 ## Prerequisites
 
