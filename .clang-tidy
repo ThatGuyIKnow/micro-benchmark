@@ -1,0 +1,6 @@
+executable = clang-tidy
+checks = *
+compilerArgs = -Wall -Wextra
+lintOnSave = true
+buildPath = build
+fixOnSave = false

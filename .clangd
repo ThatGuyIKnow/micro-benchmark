@@ -1,0 +1,27 @@
+CompileFlags:
+  Add: 
+    # You can add or override flags here if necessary, but typically, 
+    # using compile_commands.json should suffice.
+    - -std=c++20
+    - -Wall
+    - -Wextra
+    - -I${workspaceFolder}/benchmark/include
+
+# Format options could be set here, but it's common to manage formatting
+# with a separate .clang-format file
+Format:
+  BasedOnStyle: Google
+  IndentWidth: 4
+  ColumnLimit: 80
+
+If:
+  PathMatch: .*benchmark.*
+  CompileFlags:
+    Remove: [-O0]
+    Add: [-O2]
+
+Diagnostics:
+  Suppress:
+    - unused-variable
+
+# Add more configurations or customization based on your development needs
